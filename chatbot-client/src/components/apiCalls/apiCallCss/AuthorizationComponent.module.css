@@ -1,0 +1,93 @@
+.authorizationWrapper {
+    padding: 20px;
+    /* border: 1px solid #ddd; */
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    max-width: 100%;
+    margin: 20px auto;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .dropdownWrapper {
+    margin-bottom: 20px;
+    max-width: 300px;
+  }
+  
+  .label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .authDropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .authDropdown:focus {
+    border-color: #007bff;
+  }
+  
+  .inputFieldsWrapper {
+    margin-top: 20px;
+    max-width: 700px;
+  }
+  
+  .inputField {
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .htmlCodeIcon{
+    position: absolute;
+    font-size: 18px;
+    top: 40px;
+    right: 15px;
+    cursor: pointer;
+    color: rgba(128, 128, 128, 0.815);
+    cursor: pointer;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .inputField .testValueInput{
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input:focus {
+    border-color: #007bff;
+  }
+  
+  .noAuthMessage {
+    color: #888;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  

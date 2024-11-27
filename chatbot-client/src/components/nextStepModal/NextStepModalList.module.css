@@ -1,0 +1,126 @@
+.nextStepModalListContainer{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.nextStepModalListWrapper{
+    width: 100%;
+    max-width: 1000px;
+    min-height: 450px;
+    background-color: aliceblue;
+}
+
+
+
+
+/* NextStepModalList.module.css */
+
+/* .nextStepModalListContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1000;
+  } */
+  
+  .nextStepModalListWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+  }
+
+
+  .closedModalIcon{
+    position: absolute;
+    right: 100px;
+    top: 50px;
+    font-size: 30px;
+    color: #FFF;
+    cursor: pointer;
+  }
+  
+  .modalTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .nodeListWrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+  }
+  
+  .nodeBox {
+    background-color: #fff;
+    border: 2px solid #e6e6e6;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .nodeBox:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    border-color: #7cb9e8;
+  }
+  
+  .nodeIconBox {
+    font-size: 2rem;
+    color: #7cb9e8; /* Light blue for icons */
+    margin-bottom: 8px;
+  }
+  
+  .nodeLabel {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .nextStepModalListContainer {
+      width: 95%;
+    }
+  
+    .nodeBox {
+      padding: 8px;
+    }
+  
+    .nodeIconBox {
+      font-size: 1.8rem;
+    }
+  
+    .nodeLabel {
+      font-size: 0.8rem;
+    }
+  }
+  

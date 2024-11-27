@@ -1,0 +1,46 @@
+
+
+.urlParamsComponentContainer{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+    gap: 10px;
+}
+
+.paramListBox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.paramInput{
+    padding: 12px 15px;
+}
+
+.paramsKeyInputBox{
+    flex-grow: 1;
+    
+}
+
+.paramsValueInputBox{
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.htmlCodeIconParam{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+    cursor: pointer;
+}
+
+.paramsTestValueInputBox{
+    flex-grow: 1;
+}

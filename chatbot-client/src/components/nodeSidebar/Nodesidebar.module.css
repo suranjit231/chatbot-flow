@@ -1,0 +1,97 @@
+.NodeContainerSidebar {
+    width: 300px;
+    padding: 16px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.createFlowFormContainer {
+    background: #34495e;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formHeading {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #ecf0f1;
+}
+
+.flowFormControl {
+    margin-bottom: 12px;
+}
+
+.flowFormControl input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #bdc3c7;
+    font-size: 1rem;
+    background: #ecf0f1;
+}
+
+.createFlowButton {
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+}
+
+.createFlowButton:hover {
+    background: #2980b9;
+}
+
+.flowDetails {
+    padding: 12px;
+    background: #1abc9c;
+    border-radius: 8px;
+    color: #ecf0f1;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.nodeItemsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nodeItem {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 6px;
+    background: #34495e;
+    color: #ecf0f1;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background 0.3s ease;
+}
+
+.nodeItem:hover {
+    background: #1abc9c;
+    transform: translateY(-4px);
+    color: white;
+}
+
+.nodeIcon {
+    font-size: 1.5rem;
+    margin-right: 12px;
+}
+
+.nodeLabel {
+    font-size: 1rem;
+    font-weight: bold;
+}

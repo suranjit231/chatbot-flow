@@ -1,0 +1,46 @@
+
+
+.headersComponentContainer{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+    gap: 10px;
+}
+
+.headersListBox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.headersInput{
+    padding: 12px 15px;
+}
+
+.headersKeyInputBox{
+    flex-grow: 1;
+    
+}
+
+.headersValueInputBox{
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.htmlCodeIconParam{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+    cursor: pointer;
+}
+
+.headersTestValueInputBox{
+    flex-grow: 1;
+}

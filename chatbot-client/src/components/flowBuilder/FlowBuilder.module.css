@@ -1,0 +1,7 @@
+.flowCanvas{
+    height: 100vh;
+    flex-grow: 1;
+    width: calc(100vw - 300px);
+    position: relative;
+    
+}
