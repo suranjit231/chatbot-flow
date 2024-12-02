@@ -1,288 +1,3 @@
-// import express from "express";
-// import { Server } from "socket.io";
-// import { createServer } from "http";
-// import cors from "cors";
-
-// const app = express();
-// app.use(cors());
-
-// const server = createServer(app);
-
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:3000", // Allow requests from this origin
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   },
-// });
-
-// io.on("connection", (socket) => {
-//   console.log(`User connected with ID: ${socket.id}`);
-
-//   // Listen for the 'send_message' event from the client
-//   socket.on("send_message", (data) => {
-//     console.log("Message received from client:", data);
-
-//     // Emit a chatbot response back to the same client
-//     const chatbotResponse = `You said: "${data}". Here's a reply from the chatbot!`;
-//     socket.emit("receive_message", chatbotResponse);
-//   });
-
-//   // Handle user disconnection
-//   socket.on("disconnect", () => {
-//     console.log(`User disconnected with ID: ${socket.id}`);
-//   });
-// });
-
-// // Listen for default HTTP requests
-// app.get("/", (req, res) => {
-//   res.send("Chat server is running!");
-// });
-
-// // Start the server
-// server.listen(3200, () => {
-//   console.log("Server is listening on port 3200");
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import express from "express";
-// import { Server } from "socket.io";
-// import { createServer } from "http";
-// import cors from "cors";
-
-// import structuredFlowData from "./src/dummyData/FlowDataParsingTechniques";
-
-// const app = express();
-// app.use(cors());
-
-// const server = createServer(app);
-
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:3000",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   },
-// });
-
-
-
-// function validateCondition(userValue, condition) {
-//   switch (condition.validation) {
-//     case "equals":
-//       return userValue === condition.value;
-//     case "greaterThan":
-//       return userValue > condition.value;
-//     case "lessThan":
-//       return userValue < condition.value;
-//     default:
-//       return false;
-//   }
-// }
-
-
-// // User sessions to store current flow state
-// const userSessions = {};
-
-// io.on("connection", (socket) => {
-//   console.log(`User connected with ID: ${socket.id}`);
-
-//   socket.on("send_message", (data) => {
-//     const { userId, message } = data;
-
-//     // Initialize user session if not exists
-//     if (!userSessions[userId]) {
-//       userSessions[userId] = { currentNodeId: "1733054251466", variables: {} };
-//     }
-
-//     const session = userSessions[userId];
-//     const currentNode = chatbotFlow.nodes.find((node) => node.id === session.currentNodeId);
-
-//     if (!currentNode) {
-//       socket.emit("receive_message", "Sorry, I encountered an issue.");
-//       return;
-//     }
-
-//     let response;
-
-//     switch (currentNode.data.type) {
-//       case "start":
-//         response = "Hi there! How can I assist you?";
-//         break;
-
-//       case "reply-message":
-//         response = currentNode.data.message;
-//         break;
-
-//       case "question":
-//         response = currentNode.data.question.replace(/{{(\w+)}}/g, (_, key) => session.variables[key] || "");
-//         break;
-
-//       case "condition":
-//           // Handle conditional node logic
-//         const conditionGroups = currentNode.data.conditionGroupList;
-//         let conditionResponse = "I couldn't match any conditions."; 
-    
-//           // Process each condition group
-//         for (const group of conditionGroups) {
-//         let conditionsMet = true;
-    
-//             // Check if all conditions in this group are met
-//         for (const condition of group.conditions) {
-//         const userValue = session.variables[condition.variableName.slice(2, -2)]; // Remove {{}} from variable name
-//         const conditionMet = validateCondition(userValue, condition); // Validate the condition
-    
-//             if (!conditionMet) {
-//               conditionsMet = false;
-//               break; // Exit the loop if any condition fails
-//               }
-//             }
-    
-//             // If all conditions in the group are met, handle the `goto` logic
-//             if (conditionsMet) {
-//               currentNode = group.goto; // Move to the next node based on condition
-//               response = `Conditions matched! Moving to the next step.`;
-//               break; // Exit loop after processing the first matched condition
-//             }
-//           }
-    
-//           // If no conditions matched, handle `otherwise` logic
-//           if (!response.includes("Moving to the next step")) {
-//             currentNode = currentNode.data.otherWise; // Fallback to `otherwise` node
-//             response = `Conditions didn't match. Moving to the fallback step.`;
-//           }
-//           break;
-    
-
-//       case "input":
-//         // Save user input to variables
-//         session.variables[currentNode.data.variableName.slice(2, -2)] = message;
-//         response = "Got it!";
-//         break;
-
-//       default:
-//         response = "Sorry, I don't understand that.";
-//     }
-
-//     socket.emit("receive_message", response);
-
-//     // Move to the next node
-//     const edge = chatbotFlow.edges.find((e) => e.source === session.currentNodeId);
-//     if (edge) {
-//       session.currentNodeId = edge.target;
-//     } else {
-//       delete userSessions[userId]; // End session if no further nodes
-//     }
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log(`User disconnected with ID: ${socket.id}`);
-//   });
-// });
-
-// // Default HTTP route
-// app.get("/", (req, res) => {
-//   res.send("Chat server is running!");
-// });
-
-// // Start server
-// server.listen(3200, () => {
-//   console.log("Server is listening on port 3200");
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "http";
@@ -293,10 +8,8 @@ import axios from "axios";
 // Example flow data, you should replace it with your actual flow data
 import structuredFlowData from "./suranjitData.js";
 
-
 const app = express();
 app.use(cors());
-
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -314,10 +27,11 @@ const io = new Server(server, {
   },
 });
 
-
 // Function to validate the condition
 function validateCondition(userValue, condition) {
   const { validation, value } = condition;
+
+  console.log(`userValue: ${userValue} - condition: ${condition}`)
 
   if (validation.is) {
     return userValue === value;
@@ -361,179 +75,198 @@ function validateCondition(userValue, condition) {
 
 }
 
-
-
-
-
-
-
 const userSessions = {};
 
-  
 io.on("connection", (socket) => {
   console.log(`User connected with ID: ${socket.id}`);
 
   // Assign session ID using socket.id if userId is not available
   socket.on("send_message", async (data) => {
-    const { userId, message } = data;
-    
-    // Use socket.id if userId is not provided
-    const sessionId = userId || socket.id;
+    try {
+      const { userId, message } = data;
+      const sessionId = userId || socket.id;
 
-    // Initialize user session if it doesn't exist
-    if (!userSessions[sessionId]) {
-      userSessions[sessionId] = { currentNodeId: "1733111183570", variables: {} };
-      console.log(`Session initialized for user ${sessionId}`);
-    }
+      // Initialize user session if it doesn't exist
+      if (!userSessions[sessionId]) {
+        userSessions[sessionId] = { currentNodeId: "1733111183570", variables: {} };
+        console.log(`Session initialized for user ${sessionId}`);
+      }
 
-    const session = userSessions[sessionId];
-    const currentNode = structuredFlowData.nodes.find((node) => node.id === session.currentNodeId);
-    console.log(currentNode)
-  
-    if (!currentNode) {
-      socket.emit("receive_message", "Sorry, I encountered an issue.");
-      return;
-    }
+      const session = userSessions[sessionId];
+      const currentNode = structuredFlowData.nodes.find((node) => node.id === session.currentNodeId);
+      
+      if (!currentNode) {
+        socket.emit("receive_message", "Sorry, I encountered an issue finding the current node.");
+        return;
+      }
 
-    let response;
+      console.log("Current Node:", currentNode.data.type, currentNode.id);
+      console.log("Current Variables:", session.variables);
 
-    // Log session variables for debugging
-    console.log(`Session Variables for User ${sessionId}:`, session.variables);
-  
-    switch (currentNode.data.type) {
-      case "start":
-        response = "Hi there! How can I assist you?";
-        break;
-  
-      case "reply-message":
-        
-        response = response = currentNode.data.message.replace(/{{(\w+)}}/g, (_, key) => session.variables[key] || "");
+      let response;
+      let nextNodeId = null;
 
-        console.log("reply message node is execute: ", response);
-        break;
-  
-      case "question":
-        response = currentNode.data.question.replace(/{{(\w+)}}/g, (_, key) => session.variables[key] || "");
-        break;
-  
-      case "condition":
-        const conditionGroups = currentNode.data.conditionGroupList;
-        let conditionResponse = "I couldn't match any conditions.";
-  
-        for (const group of conditionGroups) {
-          let conditionsMet = true;
-  
-          for (const condition of group.conditions) {
-            const userValue = session.variables[condition.variableName.slice(2, -2)];
-            const conditionMet = validateCondition(userValue, condition);
-  
-            if (!conditionMet) {
-              conditionsMet = false;
+      switch (currentNode.data.type) {
+        case "start":
+          response = "Hi there! How can I assist you?";
+          break;
+
+        case "reply-message":
+          if (!currentNode.data.message) {
+            response = "Error: Message not defined";
+            break;
+          }
+          response = currentNode.data.message.replace(/{{(\w+)}}/g, (_, key) => {
+            const value = session.variables[key];
+            return value !== undefined ? value : "";
+          });
+          break;
+
+        case "question":
+          response = currentNode.data.question.replace(/{{(\w+)}}/g, (_, key) => {
+            const value = session.variables[key];
+            return value !== undefined ? value : "";
+          });
+          break;
+
+        case "input":
+          const variableName = currentNode.data.variableName.slice(2, -2);
+          session.variables[variableName] = message;
+          console.log(`Input received - ${variableName}: ${message}`);
+          
+          response = `Got it! Your answer for ${variableName} has been recorded.`;
+          if (currentNode.data.responseType === "choices" && currentNode.data.choices?.length) {
+            response = `Please choose one of the following: ${currentNode.data.choices.join(", ")}`;
+          }
+          break;
+
+        case "condition":
+          console.log("Executing condition node");
+          const conditionGroups = currentNode.data.conditionGroupList || [];
+          let conditionMatched = false;
+
+          for (const group of conditionGroups) {
+            let conditionsMet = true;
+            console.log("Checking condition group:", group);
+
+            for (const condition of group.conditions) {
+              const userValue = session.variables[condition.variableName?.slice(2, -2)];
+              console.log(`Checking condition - Variable: ${condition.variableName}, Value: ${userValue}, Expected: ${condition.value}`);
+              
+              const conditionMet = validateCondition(userValue, condition);
+              console.log("Condition met:", conditionMet);
+
+              if (!conditionMet) {
+                conditionsMet = false;
+                break;
+              }
+            }
+
+            if (conditionsMet) {
+              nextNodeId = group.goto;
+              response = `Conditions matched in group: ${group.condGroupName}. Moving to next step.`;
+              conditionMatched = true;
               break;
             }
           }
-  
-          if (conditionsMet) {
-            session.currentNodeId = group.goto;  // Set the next node
-            response = `Conditions matched! Moving to the next step.`;
-            break;
+
+          if (!conditionMatched) {
+            if (currentNode.data.otherWise) {
+              nextNodeId = currentNode.data.otherWise;
+              response = `No conditions matched. Using fallback path.`;
+            } else {
+              response = `No conditions matched and no fallback defined.`;
+            }
           }
-        }
-  
-      
-          session.currentNodeId = currentNode.data.otherWise;  // Fallback node
-          response = `Conditions didn't match. Moving to the fallback step.`;
-        
-        break;
-      
-      //======= if case is api-call call an api to give response back correctly.
-      case "api-call":
-        try {
-          const { reqUrl, methods, headers, body } = currentNode.data;
+          break;
 
-          // Prepare headers
-          const requestHeaders = {};
-          headers.forEach((header) => {
-            requestHeaders[header.key] = header.value.replace(/{{(\w+)}}/g, (_, key) => session.variables[key] || "");
-          });
-
-          // Prepare body
-          let requestBody;
-          if (body.type === "application/json") {
-            requestBody = JSON.parse(
-              JSON.stringify(body.bodyData).replace(/{{(\w+)}}/g, (_, key) => session.variables[key] || "")
-            );
-          } else if (body.type === "url-encoded-data") {
-            requestBody = body.bodyData.reduce((acc, field) => {
-              if (field.key && field.value) {
-                acc[field.key] = field.value.replace(/{{(\w+)}}/g, (_, key) => session.variables[key] || "");
-              }
-              return acc;
-            }, {});
-          } else if (body.type === "multipart-form-data") {
-            const formData = new FormData();
-            body.bodyData.forEach((field) => {
-              if (field.key && field.value) {
-                formData.append(field.key, field.value.replace(/{{(\w+)}}/g, (_, key) => session.variables[key] || ""));
-              }
+        case "api-call":
+          console.log("Executing API call node");
+          try {
+            const { reqUrl, methods, headers = [], body } = currentNode.data;
+            
+            // Prepare headers
+            const requestHeaders = {};
+            headers.forEach((header) => {
+              const processedValue = header.value.replace(/{{(\w+)}}/g, (_, key) => {
+                const value = session.variables[key];
+                return value !== undefined ? value : "";
+              });
+              requestHeaders[header.key] = processedValue;
             });
-            requestBody = formData;
-            Object.assign(requestHeaders, formData.getHeaders());
+
+            // Prepare body
+            let requestBody = null;
+            if (body) {
+              if (body.type === "application/json") {
+                const bodyStr = JSON.stringify(body.bodyData).replace(/{{(\w+)}}/g, (_, key) => {
+                  const value = session.variables[key];
+                  return value !== undefined ? value : "";
+                });
+                requestBody = JSON.parse(bodyStr);
+              } else if (body.type === "url-encoded-data") {
+                requestBody = {};
+                body.bodyData.forEach((field) => {
+                  if (field.key && field.value) {
+                    const processedValue = field.value.replace(/{{(\w+)}}/g, (_, key) => {
+                      const value = session.variables[key];
+                      return value !== undefined ? value : "";
+                    });
+                    requestBody[field.key] = processedValue;
+                  }
+                });
+              }
+            }
+
+            console.log("API Request:", {
+              url: reqUrl,
+              method: methods,
+              headers: requestHeaders,
+              body: requestBody
+            });
+
+            const apiResponse = await axios({
+              url: reqUrl,
+              method: methods,
+              headers: requestHeaders,
+              data: requestBody
+            });
+
+            console.log("API Response:", apiResponse.data);
+            session.variables.apiResponse = apiResponse.data;
+            response = `API call successful!`;
+          } catch (error) {
+            console.error("API call error:", error);
+            response = `API call failed: ${error.message}`;
           }
+          break;
 
-          // Make the API call using axios
-          const apiResponse = await axios({
-            url: reqUrl.replace(/{{(\w+)}}/g, (_, key) => session.variables[key] || ""),
-            method: methods,
-            headers: requestHeaders,
-            data: requestBody,
-          });
+        default:
+          response = "Unsupported node type: " + currentNode.data.type;
+      }
 
-          // Handle API response
-          response = `API call successful! Response: ${JSON.stringify(apiResponse.data)}`;
+      // Send response to client
+      socket.emit("receive_message", response);
 
-          // Optionally store response in session variables
-          session.variables.apiResponse = apiResponse.data;
-
-        } catch (error) {
-          console.error("Error in API call:", error.message || error);
-          response = `Sorry, there was an error calling the API: ${error.response?.data || error.message || "Unknown error"}`;
+      // Determine next node
+      if (nextNodeId) {
+        session.currentNodeId = nextNodeId;
+      } else {
+        const edge = structuredFlowData.edges.find((e) => e.source === session.currentNodeId);
+        if (edge) {
+          session.currentNodeId = edge.target;
+          console.log("Moving to next node:", edge.target);
+        } else {
+          console.log("No next node found. Flow completed.");
+          setTimeout(() => {
+            delete userSessions[sessionId];
+            console.log(`Session ${sessionId} cleared after completion`);
+          }, 300000);
         }
-        break;
-
-  
-      case "input":
-        const variableName = currentNode.data.variableName.slice(2, -2);  // Remove {{}} from the variable name
-        session.variables[variableName] = message;
-
-        console.log("message: ", message)
-        
-        // Log the updated session variables
-        console.log(`Updated Session Variables for User ${sessionId}:`, session.variables);
-        
-        response = `Got it! Your answer for ${variableName} has been recorded.`;
-  
-        if (currentNode.data.responseType === "choices" && currentNode.data.choices.length) {
-          response = `Please choose one of the following: ${currentNode.data.choices.join(", ")}`;
-        }
-        break;
-  
-      default:
-        response = "Sorry, I don't understand that.";
-    }
-  
-    socket.emit("receive_message", response);
-  
-    // Move to the next node based on flow data
-    const edge = structuredFlowData.edges.find((e) => e.source === session.currentNodeId);
-    if (edge) {
-      session.currentNodeId = edge.target;
-    } else {
-      // Wait for 5 minutes (300,000 milliseconds) before deleting the session
-      setTimeout(() => {
-        delete userSessions[sessionId];  // Remove session after the delay
-        console.log(`Session for user ${sessionId} has been deleted after delay.`);
-      }, 300000);
+      }
+    } catch (error) {
+      console.error("Error processing message:", error);
+      socket.emit("receive_message", "An error occurred while processing your message.");
     }
   });
 
@@ -543,43 +276,12 @@ io.on("connection", (socket) => {
 });
 
 
-
 // Default HTTP route
 app.get("/", (req, res) => {
   res.send("Chat server is running!");
 });
 
 // Start server
-server.listen(3200, () => {
-  console.log("Server is listening on port 3200");
+server.listen(3500, () => {
+  console.log("Server is listening on port 3500");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

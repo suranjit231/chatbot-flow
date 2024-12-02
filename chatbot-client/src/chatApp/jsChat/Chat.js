@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import styles from "../csChat/Chat.module.css";
 
 // Establish socket connection
-const socket = io.connect("http://localhost:3200");
+const socket = io.connect("http://localhost:3500");
 
 const Chat = () => {
   const [message, setMessage] = useState("");

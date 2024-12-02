@@ -475,7 +475,27 @@ const flowData = {
                         ]
                     }
                 ],
-                "otherWise": null
+                "otherWise":   {
+                    "id": "1733112155788",
+                    "data": {
+                        "type": "reply-message",
+                        "label": "reply messages if user data pass validation",
+                        "message": "I have collect this information! name:{{user_name}}, email{{user_email}}, phone number is {{user_mobile}}.",
+                        "delay": 1,
+                        "replyType": "text",
+                        "includeEmoji": false
+                    },
+                    "position": {
+                        "x": 359.4079594964496,
+                        "y": 575.7440063333406
+                    },
+                    "measured": {
+                        "width": 150,
+                        "height": 54
+                    },
+                    "selected": false,
+                    "dragging": false
+                },
             },
             "position": {
                 "x": 82.46144611919391,
@@ -575,7 +595,7 @@ const flowData = {
                         },
                         "conditions": [
                             {
-                                "variableName": "company_name",
+                                "variableName": "user_email",
                                 "validation": {
                                     "is": true,
                                     "is_not": false,
@@ -588,22 +608,71 @@ const flowData = {
                                     "is_empty": false
                                 },
                                 "value": "",
-                                "conditionTitle": "company_name is "
+                                "conditionTitle": "user_email is "
                             }
                         ]
                     }
                 ],
                 "otherWise": {
-                    "id": "1733112951609",
+                    "id": "1733112930610",
                     "data": {
                         "type": "api-call",
-                        "label": "API Call"
+                        "label": "API Call",
+                        "name": "",
+                        "description": "",
+                        "reqUrl": "https://65xh1slifj.execute-api.ap-south-1.amazonaws.com/dev/api/watercan/project/omnibot/fetch/user/with/mobile",
+                        "methods": "POST",
+                        "matchedPathVariableList": [],
+                        "responseStatus": [
+                            {
+                                "statusCode": "200",
+                                "gotoNode": {
+                                    "type": "end",
+                                    "label": "End",
+                                    "icon": null
+                                }
+                            }
+                        ],
+                        "urlParams": [
+                            {
+                                "key": "",
+                                "value": "",
+                                "testValue": ""
+                            }
+                        ],
+                        "headers": [],
+                        "authorization": {
+                            "authType": "",
+                            "credential": {}
+                        },
+                        "body": {
+                            "type": "application/json",
+                            "bodyData": [
+                                {
+                                    "key": "mobile",
+                                    "value": "user_phone"
+                                }
+                            ]
+                        },
+                        "testBodyData": [
+                            {
+                                "type": "raw",
+                                "key": "mobile",
+                                "value": "8970829921"
+                            }
+                        ]
                     },
                     "position": {
-                        "x": 357.20686282111404,
-                        "y": 110.39178871863697
-                    }
-                }
+                        "x": 345.18992343398105,
+                        "y": 778.9150156456702
+                    },
+                    "measured": {
+                        "width": 150,
+                        "height": 38
+                    },
+                    "selected": false,
+                    "dragging": false
+                },
             },
             "position": {
                 "x": 102.26321140569536,
