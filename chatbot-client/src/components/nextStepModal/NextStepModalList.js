@@ -33,7 +33,7 @@ export default function NextStepModalList({ toggleShowShowNextListModal,
         }
 
         //------ removed icon from nodeData -----------//
-        console.log("nodeData in start: ", nodeData);
+     //   console.log("nodeData in start: ", nodeData);
 
 
             // It's a new step, so create the node first
@@ -68,7 +68,7 @@ export default function NextStepModalList({ toggleShowShowNextListModal,
                 edges: [...prevFlow.edges, newEdge],
             }));
     
-            console.log("New node and edge created:", newNode, newEdge);
+         //   console.log("New node and edge created:", newNode, newEdge);
 
 
             if(nodeTypeIsApiCall){
@@ -107,7 +107,7 @@ export default function NextStepModalList({ toggleShowShowNextListModal,
                 edges: [...prevFlow.edges, newEdge],
             }));
     
-            console.log("Edge created:", newEdge);
+          //  console.log("Edge created:", newEdge);
 
             //----- return node to api ---------//
             if(nodeTypeIsApiCall){
@@ -117,6 +117,7 @@ export default function NextStepModalList({ toggleShowShowNextListModal,
 
             //------ return node to condition otherwise --------//
             if(isActiveGroupIsOtherWise){
+            //    console.log("otherWise fields is existing node: ", isActiveGroupIsOtherWise)
                 handleSetOtherWiseFields(existingNode);
                 return;
 
@@ -132,22 +133,25 @@ export default function NextStepModalList({ toggleShowShowNextListModal,
 
     //======== a function which trigger when click in any node list ============//
     function nodeClicked(node, selectedType){
+      //  console.log("nodeClick selectedType: ", node, selectedType)
         if(!node) return;
 
         if(OnlyGetNode){
-            console.log(" getNode and select data: ................: ", node)
+        //    console.log(" getNode and select data: ................: ", node)
             getNodeAndSetSelected(node);
             return ;
 
         }
 
         if(selectedType === "new"){
+         //   console.log(" getNode and select data: ................: ", node)
             handleClickSetNextSteps(node);
             return;
 
         }
 
          if(selectedType === "exist"){
+           // console.log(" getNode and select data: ................: ", node)
             handleClickSectectExistingSteps(node);
             return;
 
@@ -164,7 +168,7 @@ export default function NextStepModalList({ toggleShowShowNextListModal,
     function closedModal(){
         if(nodeTypeIsApiCall){
 
-            console.log("NodeType is api exexute .................: ", nodeTypeIsApiCall)
+          //  console.log("NodeType is api exexute .................: ", nodeTypeIsApiCall)
 
             handleClickSelectNextStep();
             return;
@@ -214,7 +218,7 @@ export default function NextStepModalList({ toggleShowShowNextListModal,
                 <div className={styles.nodeListWrapper}>
                     { nodes && nodes?.length>0 && nodes.map((node, idx)=>(
 
-                        <div onClick={()=>()=>nodeClicked(node, "exist")}
+                        <div onClick={()=>nodeClicked(node, "exist")}
                          key={idx} className={styles.nodeBox}>
                             <div className={styles.nodeIconBox}>
                                 {node?.icon}

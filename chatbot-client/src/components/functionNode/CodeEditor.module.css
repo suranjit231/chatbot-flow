@@ -1,0 +1,139 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.field label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.field input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.paramRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.addParamButton {
+  margin-top: 10px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editor {
+  margin-top: 20px;
+}
+
+.codeEditorWrapper {
+  display: flex;
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #282c34;
+  color: #fff;
+  overflow: hidden;
+}
+
+.lineNumbers {
+  background: #333;
+  color: #aaa;
+  padding: 10px;
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid #444;
+}
+
+.codeEditor {
+  font-family: "Fira Code", monospace;
+  width: 100%;
+  min-height: 300px;
+  padding: 10px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.runButton {
+  margin-top: 20px;
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error {
+  margin-top: 20px;
+  color: red;
+  font-weight: bold;
+  border: 1px solid red;
+  background: #ffe6e6;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

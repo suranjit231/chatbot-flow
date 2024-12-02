@@ -9,10 +9,12 @@ import ResponseRouteModal from "./ResposeReouteModal";
 import PostMenModel from "./PostmenModel";
 
 export default function ApiCallNode() {
-  const { flow, setFlow, setEdges, setNodes } = useFlowContext();
+  const { flow, setFlow, setEdges, setNodes, setSelectedNode } = useFlowContext();
   const [selectedNodeId, setSelectedNodeId] = useState(null);
   const [isShowAddResponseRouteModal, setShowAddResponseRouteModal] = useState(false);
   const [ isApiCallUrlPostmenModel, setApiCallPostmenUrlModel ] = useState(false);
+
+  
 
   // Get selected node from flow using selectedNodeId
   const selectedNode = flow.nodes.find((node) => node.id === selectedNodeId);
@@ -94,6 +96,26 @@ export default function ApiCallNode() {
     }
   };
 
+  //======= handle click api call modal ==================//
+  function handleClickSaveApiCallModel(apiCallInfo){
+    console.log("apiCallInfo: ", apiCallInfo)
+
+    setFlow((prevFlow) => ({
+      ...prevFlow,
+      nodes: prevFlow.nodes.map((node) =>
+        node.id === selectedNode?.id ? { ...node, data: { ...node.data, ...apiCallInfo } } : node
+      ),
+    }));
+
+    setNodes((prevNodes) => prevNodes?.map((node) =>
+      node.id === selectedNode?.id ? { ...node, data: { ...node.data, ...apiCallInfo } } : node
+    ));
+
+    setSelectedNode((prev)=>({...prev, data:{...apiCallInfo}}))
+    handleClickApiCallUrlPostmenModel()
+
+  }
+
   //======= function handle click api call url ============//
   function handleClickApiCallUrlPostmenModel(){
     setApiCallPostmenUrlModel((prev)=>!prev);
@@ -167,7 +189,8 @@ export default function ApiCallNode() {
       )}
 
       { isApiCallUrlPostmenModel && (
-        <PostMenModel handleClickApiCallUrlPostmenModel={handleClickApiCallUrlPostmenModel} />
+        <PostMenModel handleClickSaveApiCallModel={handleClickSaveApiCallModel}
+         handleClickApiCallUrlPostmenModel={handleClickApiCallUrlPostmenModel} />
       )}
 
 

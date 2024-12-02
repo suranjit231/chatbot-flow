@@ -11,6 +11,7 @@ import ApiCallNode from "../apiCalls/ApiCallMainNode";
 import ValidationNode from "../NodeComponents/ValidationNode";
 import AgentNode from "../NodeComponents/AgentNode";
 import styles from "./UpdateNodeProperty.module.css";
+import FunctionSideBar from "../functionNode/FunctionSideBar";
 
 export default function UpdateNodePropertyForm() {
   const { selectedNode } = useFlowContext();
@@ -35,10 +36,13 @@ export default function UpdateNodePropertyForm() {
         return <SplitNode />;
       case "api-call":
         return <ApiCallNode />;
-      case "function":
+      case "validation":
         return <ValidationNode />;
       case "agent":
         return <AgentNode />;
+
+      case "function":
+        return <FunctionSideBar />;
       default:
         return <div>Please select a node to configure.</div>;
     }

@@ -133,3 +133,29 @@
     cursor: pointer;
     color: gray;
   }
+
+
+  .rawBodyAndTestBodyWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .rawContainer{
+    width: 60%;
+  }
+
+  .rawTestBodyContainer{
+    width: 40%;
+  }
+
+  .rawTestBodyContainer .rawTestBodyTextarea{
+    width: 100%;
+    min-height: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: vertical;
+  }

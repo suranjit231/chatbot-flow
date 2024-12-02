@@ -1,0 +1,7 @@
+.radioButtonContainer{
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 15px 10px;
+}

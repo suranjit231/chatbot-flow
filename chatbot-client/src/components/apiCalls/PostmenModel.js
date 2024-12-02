@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./apiCallCss/PostmenModel.module.css";
 import { IoClose } from "react-icons/io5";
 
@@ -7,19 +7,74 @@ import HeadersComponent from "./HeadersComponent";
 import BodyComponent from "./BodyComponent";
 import ResponseComponent from "./ResponseComponent";
 import AuthorizationComponent from "./AuthorizationComponent";
+import { useFlowContext } from "../../context/FlowContext";
+
+import CallApiWithAxios from "./ApiCall";
 
 
-export default function PostMenModel({ handleClickApiCallUrlPostmenModel }) {
+export default function PostMenModel({ handleClickApiCallUrlPostmenModel, handleClickSaveApiCallModel }) {
   const [requestUrl, setRequestUrl] = useState("");
   const [requestType, setRequestType] = useState("GET");
   const [ selectedRequestFields, setSelectedRequestFields ] = useState("url-params");
   const requestTypes = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"];
   const [ isOpenVariableList, setIsOpenVariableList ] = useState(false);
 
+  const [ apiResponse, setApiResponse ] = useState(null)
+
+  //------ state from flow context ------------//
+  const { apiCallNodeStateData, setApiCallStateData, apiNode, setApiNode } = useFlowContext();
+
+  useEffect(()=>{
+    if(apiNode?.reqUrl){
+      setRequestUrl(apiNode?.reqUrl)
+
+    }
+
+    if(apiNode?.methods){
+      setRequestType(apiNode?.methods)
+      
+    }
+
+
+  },[])
+
+
+  useEffect(()=>{
+    setApiNode((prev)=>({...prev, reqUrl:requestUrl, methods:requestType}))
+
+
+  },[requestType, requestUrl])
+
 
 
   function hanndleChangeSelectedRequestFields(fields){
     setSelectedRequestFields(fields);
+  }
+
+  function handlePostmenModelSaveButtonClicked(){
+    console.log("apiCallNodeStateData: ", apiCallNodeStateData)
+    console.log("apiNode: ", apiNode)
+    handleClickSaveApiCallModel(apiNode)
+
+  }
+
+
+ async function handleClickTestButton(){
+    //console.log(`RequestType: ${requestType} and RequestUrl: ${requestUrl}`);
+  
+
+   try{
+        console.log("apiNode: ", apiNode);
+      const testResponse =  await CallApiWithAxios(apiNode);
+
+      setApiResponse(testResponse);
+
+
+   }catch(error){
+
+   }
+
+
   }
 
 
@@ -63,7 +118,7 @@ export default function PostMenModel({ handleClickApiCallUrlPostmenModel }) {
 
           {/* Test Button */}
           <div className={styles.testButtonDiv}>
-            <button className={styles.testButton}>Test</button>
+            <button onClick={()=>handleClickTestButton()} className={styles.testButton}>Test</button>
           </div>
         </div>
 
@@ -115,6 +170,9 @@ export default function PostMenModel({ handleClickApiCallUrlPostmenModel }) {
 
             isOpenVariableList={isOpenVariableList}
             setIsOpenVariableList={setIsOpenVariableList}
+            handlePostmenModelSaveButtonClicked={handlePostmenModelSaveButtonClicked}
+
+
            />}
 
 
@@ -127,6 +185,8 @@ export default function PostMenModel({ handleClickApiCallUrlPostmenModel }) {
           {selectedRequestFields === "response" && <ResponseComponent
             isOpenVariableList={isOpenVariableList}
             setIsOpenVariableList={setIsOpenVariableList}
+            apiResponse={apiResponse}
+
            />}
 
         </div>
@@ -139,7 +199,7 @@ export default function PostMenModel({ handleClickApiCallUrlPostmenModel }) {
 
             <div className={styles.rightSideFooterBtnDiv}>
                 <button className={styles.cancelButton}>Cancel</button>
-                <button>Save</button>
+                <button onClick={()=>handlePostmenModelSaveButtonClicked()}>Save</button>
             </div>
 
         </div>

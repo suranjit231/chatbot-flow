@@ -1,0 +1,124 @@
+
+.functionResponseContainer{
+    width: 100%;
+    padding: 25px;
+    min-height: 250px;
+    border: 1px solid red;
+    display:  flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.functionResponseWrapper{
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
+}
+
+.jsonInputBoxWrapper{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.mappingDropDownBoxAndInputContainer{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.jsonPathAndMapDropDownBoxContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid red;
+}
+
+.inputWrapper{
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.searchInput{
+    cursor: pointer;
+}
+
+.arrow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    cursor: pointer;
+}
+
+.clearButton{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 10px;
+
+}
+
+
+
+
+
+
+
+/* =============== mappling list css will come here =============== */
+
+
+.responseMappingListContainer{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+
+}
+
+.responseMappingList{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.commonBox{
+    flex-grow: 1;
+}
+
+.MappingInputBox{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.crossIcon{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    border: 1px solid #333;
+    cursor: pointer;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}

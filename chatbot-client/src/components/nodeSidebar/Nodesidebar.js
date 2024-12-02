@@ -12,6 +12,7 @@ import { GrProductHunt } from "react-icons/gr";
 
 import { useFlowContext } from "../../context/FlowContext";
 import { FaBuildingUser } from "react-icons/fa6";
+import { TbMathFunction } from "react-icons/tb";
 
 
 
@@ -32,8 +33,9 @@ export default function NodeContainerSidebar(){
         { type: "condition", label: "Condition", icon: <BsCodeSquare /> },
         { type: "split", label: "Split", icon: <BiGitBranch /> },
         { type: "api-call", label: "API Call", icon: <RiServerLine /> },
-        { type:"function", label:"Validation", icon: <GrProductHunt />},
-        { type:"agent", label:"Agent", icon:<FaBuildingUser />}
+        { type:"validation", label:"Validation", icon: <GrProductHunt />},
+        { type:"agent", label:"Agent", icon:<FaBuildingUser />},
+        { type:"function", label:"fn()", icon:<TbMathFunction />}
     ]
 
 

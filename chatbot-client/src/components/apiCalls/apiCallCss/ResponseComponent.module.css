@@ -1,0 +1,140 @@
+
+.responseComponentContainer{
+    width: 100%;
+    min-height: 300px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.statusCodeTitle{
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0px;
+}
+
+.bodyAndResponsePathContainer{
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 20px;
+}
+
+.bodyAndResponseContainer{
+    min-height: 200px;
+    width: 60%;
+    border: 1px solid red;
+}
+
+
+
+
+
+.jsonPathAndMapDropDownBoxContainer{
+    min-height: 200px;
+    width: 40%;
+    border: 1px solid green;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.responseMappingListContainer{
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.responseMappingList{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.commonBox{
+    flex-grow: 1;
+}
+
+.deleteIcon{
+    margin: 10px;
+    cursor: pointer;
+}
+
+.jsonInputBoxWrapper{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
+.mappingDropDownBoxAndInputContainer{
+    display: flex;
+    align-items: center;
+    gap:10px;
+  
+    width: 100%;
+}
+
+
+.inputWrapper{
+    position: relative;
+    flex-grow: 1;
+    align-items: center;
+    display: flex;
+}
+
+.arrow{
+    position: absolute;
+    top: 50%;
+    right:10px;
+    transform: translateY(-50%);
+}
+
+
+.clearButton{
+
+font-size: 10px;
+color:gray;
+cursor: pointer;
+position: absolute;
+width: 15px;
+height: 15px;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid #333;
+border-radius: 50%;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+
+}
+
+.searchInput{
+    cursor: pointer;
+}
+
+.MappingInputBox{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.crossIcon{
+    font-size: 10px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}

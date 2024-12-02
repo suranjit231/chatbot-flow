@@ -1,11 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoCodeSlash } from "react-icons/io5";
 import styles from "./apiCallCss/UrlParamsComponents.module.css";
 import VariableDropDownMenu from "./VariableDropDownMenu";
+import { useFlowContext } from "../../context/FlowContext";
 
 export default function UrlParamsComponents({ isOpenVariableList, setIsOpenVariableList }) {
     const [params, setParams] = useState([{ key: "", value: "", testValue: "" }]);
     const [selectedDropdownIndex, setSelectedDropdownIndex] = useState(null);
+
+    const { apiNode, setApiNode} = useFlowContext();
+
+
+   // ===== Update global state (apiNode) when params change ===== //
+   useEffect(() => {
+    setApiNode((prevApiNode) => ({
+        ...prevApiNode,
+        urlParams: params,
+    }));
+    }, [params, setApiNode]);
+
+    // ===== Retain params state when navigating ===== //
+    useEffect(() => {
+        if (apiNode.urlParams.length > 0) {
+            setParams(apiNode.urlParams);
+        }
+    }, []);
+
+
+
 
     // Handler to update a parameter and add a new row dynamically when typing in "value"
     const updateParam = (index, field, value) => {

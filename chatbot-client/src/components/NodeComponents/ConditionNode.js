@@ -9,7 +9,14 @@ import { BiMessageDetail } from "react-icons/bi";
 import NextStepModalList from "../nextStepModal/NextStepModalList";
 
 export default function ConditionNode() {
-  const { updateNodes, nodes, selectedNode, availableNodes, setSelectedNode } = useFlowContext();
+  const { nodes, setNodes, selectedNode,
+     setSelectedNode, flow , setFlow, 
+     
+      } = useFlowContext();
+
+
+
+
   const [label, setLabel] = useState("");
   const [selectedCondition, setSelectedCondition] = useState("All Conditions (AND)");
   const [ conditionGroupList, setConditionGroupList ] = useState([]);
@@ -41,7 +48,73 @@ export default function ConditionNode() {
     goto:"",
     conditions:[]
 
-  })
+  });
+
+  //===== when mount initialized the conditionalGroupListWithOtherWist, conditionGroupList from flows ======//
+  useEffect(()=>{
+    if(!selectedNode){
+      return
+    }
+
+   
+
+    setConditionGroupListWithOtherWise({id:selectedNode?.id,
+      otherWise:selectedNode?.data?.otherWise, conditionGroupList:selectedNode?.data?.conditionGroupList })
+      console.log("selectedCondition?.data?.otherWise: ", selectedNode?.id)
+
+      setConditionGroupList(selectedNode?.data?.conditionGroupList);
+
+      setOtherWiseConditionalGroup(selectedNode?.data?.otherWise)
+
+      
+
+
+  },[])
+
+
+  console.log("selectedCondition?.data?.otherWise: ", selectedNode?.id)
+
+
+  //======= if any changes in this depondenices update the flow, selected node, nodes array =========//
+  useEffect(()=>{
+    if (!selectedNode) return;
+
+    // Update the selectedNode's label
+    setSelectedNode((prev) => {
+      if (!prev) return prev;
+      return { ...prev, data: { ...prev.data, label: conditionalGroupListWithOtherWist?.conditionName,
+        otherWise:conditionalGroupListWithOtherWist?.otherWise,
+        conditionGroupList:[...conditionalGroupListWithOtherWist?.conditionGroupList] } };
+    });
+
+    // Update the label in the nodes array
+    setNodes((prevNodes) =>
+      prevNodes.map((node) =>
+        node.id === selectedNode.id
+          ? { ...node, data: { ...node.data, label: conditionalGroupListWithOtherWist?.conditionName,
+            otherWise:conditionalGroupListWithOtherWist?.otherWise,
+            conditionGroupList:[...conditionalGroupListWithOtherWist?.conditionGroupList] } }
+          : node
+      )
+    );
+
+    // Update the flow state
+    setFlow((prevFlow) => ({
+      ...prevFlow,
+      nodes: prevFlow.nodes.map((node) =>
+        node.id === selectedNode.id
+          ? { ...node, data: { ...node.data, label: conditionalGroupListWithOtherWist?.conditionName,
+            otherWise:conditionalGroupListWithOtherWist?.otherWise,
+            conditionGroupList:[...conditionalGroupListWithOtherWist?.conditionGroupList] } }
+          : node
+      ),
+    }));
+
+
+
+  },[conditionalGroupListWithOtherWist])
+
+
 
 
   useEffect(() => {
@@ -209,6 +282,8 @@ export default function ConditionNode() {
 
 
   function handleSetOtherWiseFields(gotoNode){
+
+    console.log("otherWise node fields value: ", gotoNode)
     setOtherWiseConditionalGroup({...gotoNode});
     setIsActiveGroupOtherWise(false);
     setShowNextStepNodeList(false);
@@ -217,6 +292,9 @@ export default function ConditionNode() {
 
 
   console.log("conditionalGroupListWithOtherWist: ", conditionalGroupListWithOtherWist);
+  console.log("flow: ", flow);
+  console.log("selectedNode: ", selectedNode);
+  console.log("nodes: ", nodes)
 
 
   function deleteOtherWise(){
@@ -268,10 +346,16 @@ export default function ConditionNode() {
           onChange={(e) => setLabel(e.target.value)}
           placeholder="Add your custom tag"
         />
+
+<button onClick={() => setSelectedNode((prev) => ({ ...prev, data: { ...prev.data, label: label } }))}>
+  Btn
+</button>
       </div>
 
 
- { conditionGroupList && conditionGroupList?.length>0 && conditionGroupList?.map((conditionalGroup, idx)=>(
+ { conditionalGroupListWithOtherWist?.conditionGroupList &&
+  conditionalGroupListWithOtherWist?.conditionGroupList?.length>0 &&
+  conditionalGroupListWithOtherWist?.conditionGroupList?.map((conditionalGroup, idx)=>(
 
 <div key={idx} className={styles.conditionGroupContainer}>
 
@@ -418,13 +502,27 @@ export default function ConditionNode() {
 
 
 
+// const conditionalNode={
+//     name:"",
+//     conditionalGroups:[
+//       {
+//         conditionName: "",
+//         conditionsChoosed: { or_condition: true, and_condition: false },
+//         goto: "",
+//         conditions: [],
+//       },
 
+//       {
+//         conditionName: "",
+//         conditionsChoosed: { or_condition: true, and_condition: false },
+//         goto: "",
+//         conditions: [],
+//       },
 
+//     ],
 
-
-
-
-
+//     otherWise:""
+// }
 
 
 

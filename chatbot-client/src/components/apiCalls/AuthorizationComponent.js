@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./apiCallCss/AuthorizationComponent.module.css";
 import { IoCodeSlash } from "react-icons/io5";
+import { useFlowContext } from "../../context/FlowContext";
 
 import VariableDropDownMenu from "./VariableDropDownMenu";
 
@@ -19,6 +20,23 @@ export default function AuthorizationComponent() {
   const authOptions = ["No Auth", "Basic Auth", "Digest Auth", "Bearer Token"];
 
   const [ selectedDropDownMenuFor, setSelectdDropDownMenu ] = useState(null);
+  const { apiNode, setApiNode} = useFlowContext();
+
+  
+
+
+  useEffect(() => {
+    setApiNode((prevState) => ({
+      ...prevState,
+      authorization: {
+        authType,
+        credential: credentials,
+      },
+    }));
+  }, [authType, credentials, setApiNode]);
+
+
+
 
   const handleInputChange = (e) => {
     setCredentials({
@@ -62,6 +80,28 @@ export default function AuthorizationComponent() {
 
   }
 
+
+
+
+
+
+
+
+
+
+   // Load initial values from `apiNode` on component mount
+   useEffect(() => {
+    if (apiNode.authorization) {
+      setAuthType(apiNode.authorization.authType || "No Auth");
+      setCredentials(apiNode.authorization.credential || {
+        username: "",
+        password: "",
+        token: "",
+        testTokenValue: "",
+      });
+    }
+  }, []);
+
   return (
     <div className={styles.authorizationWrapper}>
       {/* Dropdown for Authorization Type */}
@@ -98,7 +138,7 @@ export default function AuthorizationComponent() {
                       type="text"
                       id="username"
                       name="username"
-                      value={credentials.username.key}
+                      value={credentials?.username?.key}
                       onChange={handleInputChange}
                       className={styles.input}
                       placeholder="Enter username"
@@ -142,7 +182,7 @@ export default function AuthorizationComponent() {
                     type="password"
                     id="password"
                     name="password"
-                    value={credentials.password.key}
+                    value={credentials?.password?.key}
                     onChange={handleInputChange}
                     className={styles.input}
                     placeholder="Enter password"
@@ -184,7 +224,7 @@ export default function AuthorizationComponent() {
                 type="text"
                 id="token"
                 name="token"
-                value={credentials.token.key}
+                value={credentials?.token?.key}
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder="Enter token"

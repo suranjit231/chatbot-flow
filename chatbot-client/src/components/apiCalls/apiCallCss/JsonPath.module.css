@@ -1,0 +1,48 @@
+
+
+.radioButtonContainer{
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 15px 10px;
+}
+
+
+/* .jsonExplorer {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+  }
+  
+  .jsonItem {
+    margin-bottom: 12px;
+  }
+  
+  .keyLabel {
+    font-weight: bold;
+  }
+  
+  .value {
+    margin-left: 20px;
+  }
+  
+  .radioButtonContainer {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+  
+  .radioButtonContainer input[type="radio"] {
+    margin-right: 8px;
+  }
+  
+  .radioButtonContainer label {
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .radioButtonContainer input[type="radio"]:checked + label {
+    color: #4caf50;
+  }
+   */

@@ -33,6 +33,44 @@ export function FlowContaxtProvider({children}){
     const [selectedNode, setSelectedNode ] = useState(null);
     const [ selectedvariable, setSelectedvariable ] = useState("");
 
+    const [ apiCallNodeStateData, setApiCallStateData ] = useState({body: { type: "", bodyData: [] }});
+    const [ apiNode, setApiNode ] = useState({
+      name: "",
+      description: "",
+      reqUrl: "",
+      methods: "",
+      matchedPathVariableList: [],
+      responseStatus: [],
+      urlParams: [],
+      headers: [],
+      authorization:{ authType:"", credential:{}},
+      body: { type: "", bodyData: [] },
+      testBodyData:[
+        {
+          type:"",
+          key: "",
+          value:"",
+        }
+      ]
+
+    });
+
+
+    const [conditionalGroupListWithOtherWist, setConditionGroupListWithOtherWise] = useState({
+      conditionGroupList: [],
+      otherWise: null,
+    });
+  
+    const [conditionGroupList, setConditionGroupList] = useState([]);
+    const [isSetOtherWiseConditionalGroup, setOtherWiseConditionalGroup] = useState(null);
+
+
+
+
+
+
+
+
 
     const availableNodes = [
       { type: "start", label: "Start", icon: <AiOutlinePlayCircle /> },
@@ -43,7 +81,7 @@ export function FlowContaxtProvider({children}){
       { type: "condition", label: "Condition", icon: <BsCodeSquare /> },
       { type: "split", label: "Split", icon: <BiGitBranch /> },
       { type: "api-call", label: "API Call", icon: <RiServerLine /> },
-      { type:"function", label:"Validation", icon: <GrProductHunt />},
+      { type:"validation", label:"Validation", icon: <GrProductHunt />},
       { type:"agent", label:"Agent", icon:<FaBuildingUser />}
   ]
 
@@ -75,7 +113,7 @@ export function FlowContaxtProvider({children}){
             return;
           }
 
-          const additionalInfo = nodeData.type === "api-call" ? {
+          let additionalInfo = nodeData.type === "api-call" ? {
             name: "",
             description: "",
             reqUrl: "",
@@ -86,6 +124,18 @@ export function FlowContaxtProvider({children}){
             headers: [],
             body: { type: "", bodyData: [] },
         } : {};
+
+
+        //----- if it is a condtional node ---------//
+
+        additionalInfo = nodeData.type === "condition" ? {
+        name:"",
+        conditionGroupList:[],
+        otherWise: null,
+
+      } : {};
+
+
       
           const newNode = {
             id: Date.now().toString(),
@@ -109,6 +159,9 @@ export function FlowContaxtProvider({children}){
           }));
 
     }
+
+    console.log("dlows: ", flow)
+
 
 
     //------- changes in ndes --------------//
@@ -159,6 +212,7 @@ export function FlowContaxtProvider({children}){
 
       //======== handle selectedNode ===============//
       function handleNodeClick(_, node){
+        console.log("handleselect node click: ", node)
         setSelectedNode(node.id === selectedNode?.id ? null : node);
        
       }
@@ -286,7 +340,19 @@ export function FlowContaxtProvider({children}){
               flow,
               setSelectedNode,
               deteteGotoNodeAndClearItsReferences,
-              selectedvariable, setSelectedvariable
+              selectedvariable,
+               setSelectedvariable,
+              apiCallNodeStateData,
+               setApiCallStateData,
+               apiNode,
+              setApiNode,
+              
+              conditionalGroupListWithOtherWist,
+              setConditionGroupListWithOtherWise,
+              conditionGroupList,
+              setConditionGroupList,
+              isSetOtherWiseConditionalGroup,
+              setOtherWiseConditionalGroup,
 
              }}>
 

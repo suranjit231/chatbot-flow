@@ -1,11 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoCodeSlash } from "react-icons/io5";
 import styles from "./apiCallCss/HeadersComponent.module.css";
 import VariableDropDownMenu from "./VariableDropDownMenu";
+import { useFlowContext } from "../../context/FlowContext";
+
 
 export default function HeadersComponent() {
     const [headers, setHeaders] = useState([{ key: "", value: "", testValue: "" }]);
-    const [openDropdownIndex, setOpenDropdownIndex] = useState(null); // Track which dropdown is open
+    const [openDropdownIndex, setOpenDropdownIndex] = useState(null); 
+
+    const { apiNode, setApiNode} = useFlowContext();
+
+
+     // ===== Update global state (apiNode) when params change ===== //
+   useEffect(() => {
+    setApiNode((prevApiNode) => ({
+        ...prevApiNode,
+        headers: headers,
+    }));
+    }, [headers, setApiNode]);
+
+    // ===== Retain params state when navigating ===== //
+    useEffect(() => {
+        if (apiNode.headers.length > 0) {
+            setHeaders(apiNode.headers);
+        }
+    }, []);
+
+
 
     const updateHeader = (index, field, value) => {
         if (index === null || index < 0 || index >= headers.length) {
